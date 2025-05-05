@@ -13,11 +13,12 @@ async function createUser(req, res) {
   try {
     console.log(req.body.password);
     
-    const user = UserService.create({
+    const user = await UserService.create({
       email: req.body.email,
       password: req.body.password,
     });
 
+    console.log(user);
     SuccessResponse.data = user;
     return res.status(StatusCodes.CREATED).json(SuccessResponse);
   } catch (error) {
