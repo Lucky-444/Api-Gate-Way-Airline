@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken'); 
 const {ServerConfig} = require('../../config');
 
-async function checkPassword(plainPassword, encryptedPassword) {
+ function checkPassword(plainPassword, encryptedPassword) {
   try {
     return bcrypt.compareSync(plainPassword, encryptedPassword);
   } catch (error) {
@@ -12,7 +12,7 @@ async function checkPassword(plainPassword, encryptedPassword) {
   }
 }
 
-async function createToken(input) {
+ function createToken(input) {
         try {
            return jwt.sign(input, ServerConfig.JWT_SECRET , {expiresIn : ServerConfig.JWT_EXPIRY});    
         } catch (error) {

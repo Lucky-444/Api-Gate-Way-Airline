@@ -51,7 +51,7 @@ async function signin(data) {
   } catch (error) {
     console.log(error)
     
-    throw new AppError("something went Wrong" , StatusCodes.INTERNAL_SERVER_ERROR);
+    throw new AppError(error.message, StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
 
