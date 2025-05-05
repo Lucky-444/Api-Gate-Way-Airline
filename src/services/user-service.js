@@ -9,6 +9,8 @@ async function create(data) {
     const user = await UserRepo.create(data);
     return user;
   } catch (error) {
+    console.error("User creation failed:", error); // 👈 Add this line
+  
     if (
       error.name === "SequelizeValidationError" ||
       error.name === "SequelizeConstraintError"
@@ -17,17 +19,16 @@ async function create(data) {
       error.errors.forEach((err) => {
         explanation.push(err.message);
       });
-
+  
       throw new AppError(explanation, StatusCodes.BAD_REQUEST);
     }
-
+  
     throw new AppError(
       "cant create a new User object",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }
 }
-
 module.exports = {
         create,
         
