@@ -50,7 +50,7 @@ async function signin(data) {
 
   } catch (error) {
     console.log(error)
-    
+    if(error instanceof AppError) throw error;
     throw new AppError(error.message, StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
