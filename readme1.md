@@ -11,3 +11,25 @@
         we use it in models 
 
 }
+
+{
+        difference between authentication and authorisation
+        authorisation : assignig functionalities and permission and capabilites
+        to different rolls of different users
+        
+
+        authentication : 
+        identify  are you valid user or not
+
+
+}
+{
+        different types of authentication
+        passportjs
+
+}
+
+{
+        jwt : json web tokens
+        
+}
