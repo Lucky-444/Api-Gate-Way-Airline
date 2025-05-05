@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
-
+// const AppError  = require('../utils/errors');
+const AppError = require("../utils/errors/app-errors");
 const { UserService } = require("../services");
 const { SuccessResponse, ErrorResponse } = require("../utils/common");
 
@@ -22,8 +23,10 @@ async function createUser(req, res) {
     SuccessResponse.data = user;
     return res.status(StatusCodes.CREATED).json(SuccessResponse);
   } catch (error) {
+    console.log(error.message);
+    
         ErrorResponse.error = error;
-        res.status(error?.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+        res.status(error?.statuscode || StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: error.message || "Something went wrong" });
   }
 }
