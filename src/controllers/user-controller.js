@@ -27,7 +27,7 @@ async function createUser(req, res) {
     console.log(error.message);
     
         ErrorResponse.error = error;
-        res.status(error?.statuscode || StatusCodes.INTERNAL_SERVER_ERROR)
+       return res.status(error?.statuscode || StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: error.message || "Something went wrong" });
   }
 }
@@ -44,7 +44,7 @@ async function signin(req , res) {
     } catch (error) {
       console.log(error);
       ErrorResponse.error = error;
-      res.status(error?.statuscode || StatusCodes.INTERNAL_SERVER_ERROR)
+     return res.status(error?.statuscode || StatusCodes.INTERNAL_SERVER_ERROR)
     .json({ message: error.message || "Something went wrong" });
     }
 }
@@ -63,8 +63,8 @@ async function addRoleToUser(req , res) {
   } catch (error) {
     console.log(error);
     ErrorResponse.error = error;
-    res.status(error?.statuscode || StatusCodes.INTERNAL_SERVER_ERROR)
-  .json({ message: error.message || "Something went wrong" });
+    return res.status(error?.statuscode || StatusCodes.INTERNAL_SERVER_ERROR)
+  .json(ErrorResponse);
   }
 }
 

@@ -71,8 +71,9 @@ async function isAuthenticated(token) {
         throw new AppError("Missing JWT TOKEN" , StatusCodes.BAD_REQUEST);
       }
       const response = Auth.verifyToken(token);
-
-      const user = UserRepo.get(response.id);
+      console.log(response.id)
+      
+      const user =await UserRepo.get(response.id);
       if(!user){
         throw new AppError("No User Found" , StatusCodes.BAD_REQUEST);
       }
@@ -110,9 +111,36 @@ async function addRoleToUser(data){
   }
 }
 
+
+async function isAdmin(id){
+  try {
+    console.log(id);
+    const user = await UserRepo.get(id);
+    if(!user){
+      throw new AppError("no User found by the Email" , StatusCodes.BAD_REQUEST);
+    }
+    const adminRole = await RoleRepo.getRoleByName(Enums.USER_ROLE_ENUMS.ADMIN);
+    if(!adminRole){
+      throw new AppError("No ROle FOund ", StatusCodes.BAD_REQUEST);
+    }
+    
+    return user.hasRole(adminRole);
+  } catch (error) {
+    console.log(error)
+    if(error instanceof AppError) throw error;
+    throw new AppError(error.message, StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
+
+
+
+
+
 module.exports = {
   create,
   signin,
   isAuthenticated,
   addRoleToUser,
+  isAdmin,
 };

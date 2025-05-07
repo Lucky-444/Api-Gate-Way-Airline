@@ -18,7 +18,10 @@ router.post('/signin' ,AuthRequestMiddleware.validateAuthRequest ,  UserControll
  * POST /role
  * body = {role , id};
  */
-router.post('/role',UserController.addRoleToUser);
+router.post('/role',AuthRequestMiddleware.checkAuth,AuthRequestMiddleware.isAdmin,UserController.addRoleToUser);
+
+
+
 
 
 
