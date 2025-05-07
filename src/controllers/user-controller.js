@@ -52,6 +52,22 @@ async function signin(req , res) {
 
 
 
+async function addRoleToUser(req , res) {
+  try {
+    const user = await UserService.addRoleToUser({
+      role : req.body.role,
+      id : req.body.id,
+    })
+    SuccessResponse.data  = user;
+    return res.status(StatusCodes.CREATED).json(SuccessResponse);
+  } catch (error) {
+    console.log(error);
+    ErrorResponse.error = error;
+    res.status(error?.statuscode || StatusCodes.INTERNAL_SERVER_ERROR)
+  .json({ message: error.message || "Something went wrong" });
+  }
+}
+
 
 
 
@@ -59,4 +75,5 @@ async function signin(req , res) {
 module.exports = {
         createUser,
         signin,
+        addRoleToUser,
 }

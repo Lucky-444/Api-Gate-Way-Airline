@@ -90,8 +90,29 @@ async function isAuthenticated(token) {
     }
 }
 
+async function addRoleToUser(data){
+  try {
+    const user = await UserRepo.get(data.id);
+    if(!user){
+      throw new AppError("no User found by the Email" , StatusCodes.BAD_REQUEST);
+    }
+    const role = await RoleRepo.getRoleByName(data.role);
+    if(!role){
+      throw new AppError("No ROle FOund ", StatusCodes.BAD_REQUEST);
+    }
+    user.addRole(role);
+    return user;
+
+  } catch (error) {
+    console.log(error)
+    if(error instanceof AppError) throw error;
+    throw new AppError(error.message, StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
 module.exports = {
   create,
   signin,
   isAuthenticated,
+  addRoleToUser,
 };

@@ -241,3 +241,9 @@
 
 
 }
+
+{
+        no one can change their role to admin or etc
+        so we add custom function that only admin can add role to another
+        
+}
