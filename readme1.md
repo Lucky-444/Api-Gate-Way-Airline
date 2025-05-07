@@ -59,58 +59,59 @@
         reverse Proxy =>{
                 A reverse proxy is a server that sits in front of one or more backend servers, intercepting requests from clients and forwarding them to the appropriate backend. It then receives the response and sends it back to the client as if it originated from the proxy.
 
-| Feature          | Reverse Proxy                            | Forward Proxy                                |
-| ---------------- | ---------------------------------------- | -------------------------------------------- |
-| Sits in front of | Backend servers                          | Clients (users)                              |
-| Hides            | Backend servers                          | Clients                                      |
-| Used for         | Load balancing, caching, SSL termination | Anonymity, content filtering, access control |
-| Common tools     | NGINX, Apache, HAProxy, API Gateway      | Squid, browser plugins                       |
+        | Feature          | Reverse Proxy                            | Forward Proxy                                |
+        | ---------------- | ---------------------------------------- | -------------------------------------------- |
+        | Sits in front of | Backend servers                          | Clients (users)                              |
+        | Hides            | Backend servers                          | Clients                                      |
+        | Used for         | Load balancing, caching, SSL termination | Anonymity, content filtering, access control |
+        | Common tools     | NGINX, Apache, HAProxy, API Gateway      | Squid, browser plugins                       |
 
         }
 }
 
 {
-        🛠️ Common Uses of a Reverse Proxy
-Load Balancing
-Distribute traffic across multiple backend servers to prevent overload.
+                🛠️ Common Uses of a Reverse Proxy
+        Load Balancing
+        Distribute traffic across multiple backend servers to prevent overload.
 
-SSL Termination
-Handle HTTPS traffic at the proxy level, reducing CPU load on backends.
+        SSL Termination
+        Handle HTTPS traffic at the proxy level, reducing CPU load on backends.
 
-Caching
-Serve frequently requested content directly, improving speed.
+        Caching
+        Serve frequently requested content directly, improving speed.
 
-Security
-Hide backend IPs and enforce WAF (Web Application Firewall) rules.
+        Security
+        Hide backend IPs and enforce WAF (Web Application Firewall) rules.
 
-Centralized Authentication
-Handle auth (OAuth, JWT, etc.) at the proxy before passing to backend.
+        Centralized Authentication
+        Handle auth (OAuth, JWT, etc.) at the proxy before passing to backend.
 
-API Gateway Functionality
-Forward API requests to microservices (common in AWS API Gateway, Kong, NGINX).
+        API Gateway Functionality
+        Forward API requests to microservices (common in AWS API Gateway, Kong, NGINX).
 
  
-}{
+}
+{
         An orchestration layer is a component in a system architecture responsible for coordinating and managing interactions between different services, processes, or components. It "orchestrates" workflows, meaning it controls what happens, when, and in what order, often making decisions based on business logic.
 
-🔧 What Does an Orchestration Layer Do?
-Coordinates services: Calls multiple services and handles their responses.
+        🔧 What Does an Orchestration Layer Do?
+        Coordinates services: Calls multiple services and handles their responses.
 
-Implements business logic: Determines control flow across services.
+        Implements business logic: Determines control flow across services.
 
-Error handling & retries: Manages failures gracefully.
+        Error handling & retries: Manages failures gracefully.
 
-State management: Keeps track of workflow progress if needed.
+        State management: Keeps track of workflow progress if needed.
 
-Service composition: Combines outputs from multiple services into one response.
+        Service composition: Combines outputs from multiple services into one response.
 }
 
 {
         API GATEWAY{
                 authentication
                 RateLimiting
-                Autherisation
                 Proxy
+                Autherisation
 
         }
 }
@@ -219,6 +220,24 @@ Service composition: Combines outputs from multiple services into one response.
                 );
 
                 set up our Proxy Middleware
-                
+
         }
+}
+
+
+{
+        now come to Authorisation part
+        no we will creaate a new  model 
+        `npx sequelize model:generate --name Role --attributes name:string`
+        it associate many to many realtion by using through table or joins table
+        `npx sequelize model:generate --name Role --attributes name:string`
+
+        now do `npx sequelize db:migrate`
+
+        add a new seed file
+        `npx sequelize seed:generate --name add-roles`
+
+        `npx sequelize model:generate --name User_Role --attributes user_id:integer,role_id:integer`
+
+
 }
