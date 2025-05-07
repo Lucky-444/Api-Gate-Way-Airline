@@ -1,14 +1,23 @@
 const { StatusCodes } = require("http-status-codes");
-const { UserRepository } = require("../repositories");
+const { UserRepository , RoleRepository } = require("../repositories");
 const AppError = require("../utils/errors/app-errors");
 const bcrypt = require("bcrypt");
-const { Auth } = require("../utils/common");
+const { Auth , Enums } = require("../utils/common");
 
 const UserRepo = new UserRepository();
+const RoleRepo = new RoleRepository();
 
 async function create(data) {
   try {
+    if (!data.email || !data.password) {
+      throw new AppError("Email and Password are required", StatusCodes.BAD_REQUEST);
+    }
     const user = await UserRepo.create(data);
+    const role = await RoleRepo.getRoleByName(Enums.USER_ROLE_ENUMS.CUSTOMER);// why this becoz any user should signup like normal customer
+    // and via admin they can be change their Role
+    // generally admin Role directly assign by dataBase
+    
+    user.addRole(role);
     return user;
   } catch (error) {
     console.error("User creation failed:", error); // 👈 Add this line

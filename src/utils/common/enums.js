@@ -1,4 +1,4 @@
-USER_ROLE_ENUMS ={
+const USER_ROLE_ENUMS ={
         ADMIN : 'admin',
         CUSTOMER :'customer',
         FLIGHT_COMPANY :'flight_company'
