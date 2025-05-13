@@ -245,5 +245,72 @@
 {
         no one can change their role to admin or etc
         so we add custom function that only admin can add role to another
+
+}
+
+
+
+{
+
+        ####Home work==>{
+              in flight service if youre not an admin and you are not an flight company 
+              then you should not be change the flights data
+
+              HINT : {
+                app.use(
+                        '/bookingService',[f1 ,f2]
+                        createProxyMiddleware({
+                        target: ServerConfig.BOOKING_SERVICE,
+                        changeOrigin: true,
+                        // pathFilter: '/api/proxy-only-this-path',
+                        }),
+                        );
+                 
+
+                function(req , res ,next){
+                        console.log(f1);
+                        next();
+                }       
+
+                function(req, res, next){
+                        console.log(f2);
+                        next();
+                }
+              }
+
+              like this : {
+                // Assuming '/flightService' is the protected route
+                app.use('/flightService', [
+                checkAuth, // Ensure the user is authenticated
+                checkFlightAccess, // Check if the user has the correct role (ADMIN or FLIGHT_COMPANY)
+                createProxyMiddleware({
+                target: ServerConfig.BOOKING_SERVICE, // Your booking service URL
+                changeOrigin: true,
+                pathRewrite: {
+                '^/flightService': '', // Optional: Rewrite path if needed
+                },
+                })
+                ]);
+              }
+        
+        }
+}
+
+
+
+{
+        notification service addes
+        set up messaging quue
+        
+}
+
+{
+        FRONTEND - MIDDLE END - BACKEND
+        1.we need an intermediate layer between the client side and the microservice
+        2.using the middleware end when clients send an requst towe will be able to make the decision
+        to which microservice should actualyy respond to the request
+        3.using the middleware end we can also add some business logic to the request before it
+        4.we can do messge validation , message transformation and rate limiting
+        we try prepare an api gate way that act as this middleend service
         
 }

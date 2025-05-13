@@ -50,6 +50,25 @@ async function isAdmin(req , res, next) {
   next();
 }
 
+
+
+// Middleware to check if user has required role to modify flight data
+// async function checkFlightAccess(req, res, next) {
+//   try {
+//     const userId = req.user; // Assuming req.user is set by checkAuth middleware
+//     const isAdmin = await UserService.isAdmin(userId);
+//     const isFlightCompany = await UserService.hasRole(userId, Enums.USER_ROLE_ENUMS.FLIGHT_COMPANY);
+
+//     if (!isAdmin && !isFlightCompany) {
+//       return res.status(403).json({ message: "You are not authorized to modify flight data." });
+//     }
+    
+//     next(); // Allow access if authorized
+//   } catch (error) {
+//     return res.status(500).json({ message: "Internal Server Error." });
+//   }
+// }
+
 module.exports = {
   validateAuthRequest,
   checkAuth,

@@ -10,7 +10,7 @@ const app = express();
 
 const limiter = rateLimit({
   windowMs : 2 * 60 * 1000,///in every 2 mins window 
-  max: 3,//3 request are come
+  max: 30,//3 request are come
 
   })
 
